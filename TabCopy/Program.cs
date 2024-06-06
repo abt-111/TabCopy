@@ -21,7 +21,7 @@ class MainClass
         intarray3[2] = intarray1[2];
 
         intarray3[3] = intarray2[0];
-        intarray3[4] = intarray2[2];
-        intarray3[5] = intarray2[3];
+        intarray3[4] = intarray2[1];
+        intarray3[5] = intarray2[2];
     }
 }
