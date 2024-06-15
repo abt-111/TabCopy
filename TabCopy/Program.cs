@@ -3,44 +3,50 @@
     public const int TAB_SIZE = 3;
     public static void Main(string[] args)
     {
+        int[] intArray1 = new int[TAB_SIZE],
+            intArray2 = new int[TAB_SIZE],
+            intArray3 = new int[TAB_SIZE * 2];
+
+        // Affectation des valeurs dans les deux premiers tableaux
+        InitializeArray(intArray1);
+        InitializeArray(intArray2);
+
+        // Affectation des deux premiers tableaux dans le troisième
+        InsertArraysInArray([intArray1, intArray2], intArray3, TAB_SIZE);
+
+        // Préparation de chaînes de caractères pour l'affichage
+        DisplayArray(intArray1, 1);
+        DisplayArray(intArray2, 2);
+        DisplayArray(intArray3, 3);
+    }
+
+    public static void InitializeArray(int[] intArray)
+    {
         Random random = new Random();
 
-        long[] intarray1 = new long[TAB_SIZE],
-            intarray2 = new long[TAB_SIZE],
-            intarray3 = new long[TAB_SIZE * 2];
-
-        string stringForDisplay1 = "",
-            stringForDisplay2 = "",
-            stringForDisplay3 = "";
-
-        for(int i = 0; i < TAB_SIZE; i++)
+        for (int i = 0; i < intArray.Length; i++)
         {
-            // Affectation des valeurs dans les deux premiers tableaux
-            intarray1[i] = random.NextInt64();
-            intarray2[i] = random.NextInt64();
+            intArray[i] = random.Next();
         }
+    }
 
-        for (int i = 0; i < TAB_SIZE; i++)
+    public static void InsertArraysInArray(int[][] intArrays, int[] intArray, int startIndex)
+    {
+        for (int i = 0; i < intArrays.Length; i++)
         {
-            // Affectation des deux premiers tableaux dans le troisième
-            intarray3[i] = intarray1[i];
-            intarray3[i + TAB_SIZE] = intarray2[i];
+            for(int j = 0; j < intArrays[i].Length; j++)
+            {
+                intArray[j + (i * startIndex)] = intArrays[i][j];
+            }
         }
+    }
 
-        // Préparation de chaînes de caractères pour l'affichage
-            for (int i = 0; i < TAB_SIZE; i++)
+    public static void DisplayArray(int[] intArray, int number)
+    {
+        for (int i = 0; i < intArray.Length; i++)
         {
-            // Préparation de chaînes de caractères pour l'affichage
-            stringForDisplay1 += $"intarray1[{i}] = {intarray1[i]}\n";
-            stringForDisplay2 += $"intarray2[{i}] = {intarray2[i]}\n";
+            Console.WriteLine($"intArray{number}[{i}] = {intArray[i]}");
         }
-
-        // Préparation de chaînes de caractères pour l'affichage
-        for (int i = 0; i < TAB_SIZE * 2; i++)
-        {
-            stringForDisplay3 += $"intarray3[{i}] = {intarray3[i]}\n";
-        }
-
-        Console.WriteLine(stringForDisplay1 + "\n" + stringForDisplay2 + "\n" + stringForDisplay3);
+        Console.WriteLine();
     }
 }
