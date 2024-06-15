@@ -1,27 +1,46 @@
-﻿using System;
-
-class MainClass
+﻿class MainClass
 {
+    public const int TAB_SIZE = 3;
     public static void Main(string[] args)
     {
-        int[] intarray1 = new int[3];
-        int[] intarray2 = new int[3];
-        int[] intarray3 = new int[6];
+        Random random = new Random();
 
-        intarray1[0] = 123;
-        intarray1[1] = 213;
-        intarray1[2] = 321;
+        long[] intarray1 = new long[TAB_SIZE],
+            intarray2 = new long[TAB_SIZE],
+            intarray3 = new long[TAB_SIZE * 2];
 
-        intarray2[0] = 456;
-        intarray2[1] = 546;
-        intarray2[2] = 645;
+        string stringForDisplay1 = "",
+            stringForDisplay2 = "",
+            stringForDisplay3 = "";
 
-        intarray3[0] = intarray1[0];
-        intarray3[1] = intarray1[1];
-        intarray3[2] = intarray1[2];
+        for(int i = 0; i < TAB_SIZE; i++)
+        {
+            // Affectation des valeurs dans les deux premiers tableaux
+            intarray1[i] = random.NextInt64();
+            intarray2[i] = random.NextInt64();
+        }
 
-        intarray3[3] = intarray2[0];
-        intarray3[4] = intarray2[1];
-        intarray3[5] = intarray2[2];
+        for (int i = 0; i < TAB_SIZE; i++)
+        {
+            // Affectation des deux premiers tableaux dans le troisième
+            intarray3[i] = intarray1[i];
+            intarray3[i + TAB_SIZE] = intarray2[i];
+        }
+
+        // Préparation de chaînes de caractères pour l'affichage
+            for (int i = 0; i < TAB_SIZE; i++)
+        {
+            // Préparation de chaînes de caractères pour l'affichage
+            stringForDisplay1 += $"intarray1[{i}] = {intarray1[i]}\n";
+            stringForDisplay2 += $"intarray2[{i}] = {intarray2[i]}\n";
+        }
+
+        // Préparation de chaînes de caractères pour l'affichage
+        for (int i = 0; i < TAB_SIZE * 2; i++)
+        {
+            stringForDisplay3 += $"intarray3[{i}] = {intarray3[i]}\n";
+        }
+
+        Console.WriteLine(stringForDisplay1 + "\n" + stringForDisplay2 + "\n" + stringForDisplay3);
     }
 }
